@@ -1,65 +1,54 @@
 import java.util.Arrays;
 
 class MergeSort {
-  public static int[] merge(int[] a, int[] b) {
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    int[] sorted = new int[a.length + b.length];
-    while ((i < a.length) && (j < b.length)) {
-      if (a[i] <= b[j]) {
-        sorted[k] = a[i];
-        i++;
-      } else {
-        sorted[k] = b[j];
-        j++;
-      }
-      k++;
-    }
-    while (i < a.length) {
-      sorted[k] = a[i];
-      i++;
-      k++;
-    }
-    while (j < b.length) {
-      sorted[k] = b[j];
-      j++;
-      k++;
-    }
-    return sorted;
+
+  public static void mergesort(int[] arr) {
+    mergesort(arr, 0, arr.length - 1);
   }
 
-  public static int[] mergesort(int[] arr) {
-    if (arr.length == 1) {
-      int[] new_arr = {arr[0]};
-      return new_arr;
+  private static void mergesort(int[] arr, int start, int end) {
+    if (start < end) {
+      int mid = (start + end) / 2;
+      mergesort(arr, start, mid);
+      mergesort(arr, mid + 1, end);
+      merge(arr, start, mid, end);
     }
-    int mid = arr.length / 2;
-    int i = 0;
-    int[] left = new int[mid];
-    int[] right = new int[arr.length - mid];
+  }
 
-    int j = 0;
-    while (i < mid) {
-      left[j] = arr[i];
-      i++;
-      j++;
-    }
+  private static void merge(int[] arr, int start, int mid, int end) {
+    int[] helper = new int[arr.length];
 
-    j = 0;
-    while (i < arr.length) {
-      right[j] = arr[i];
-      i++;
-      j++;
+    for (int i = start; i <= end; i++) {
+      helper[i] = arr[i];
     }
 
-    return merge(mergesort(left), mergesort(right));
+    int index1 = start;
+    int index2 = mid + 1;
+    int curr = start;
+    while ((index1 <= mid) && (index2 <= end)) {
+      if (helper[index1] <= helper[index2]) {
+        arr[curr] = helper[index1];
+        index1++;
+      } else {
+        arr[curr] = helper[index2];
+        index2++;
+      }
+      curr++;
+    }
+
+    while (index1 <= mid) {
+      arr[curr] = helper[index1];
+      index1++;
+      curr++;
+    }
   }
 
   public static void main(String[] args) {
     int[] nums1 = {5, 4, 2, 3, 1, 6, 8, 7, 9, 10};
-    System.out.println(Arrays.toString(mergesort(nums1)));
+    mergesort(nums1);
+    System.out.println(Arrays.toString(nums1));
     int[] nums2 = {5, 4, 2, 3, 1, 6, 8, 7, 10};
-    System.out.println(Arrays.toString(mergesort(nums2)));
+    mergesort(nums2);
+    System.out.println(Arrays.toString(nums2));
   }
 }
