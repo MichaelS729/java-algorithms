@@ -92,17 +92,17 @@ public class QuickAlgorithms {
    * Finds the median value of the array using Median of Medians.
    */
   public static int median(int[] arr) {
-    return median(arr, arr.length/2 + 1, 0, arr.length - 1);
+    return arr[medianIndex(arr, arr.length/2 + 1, 0, arr.length - 1)];
   }
 
-  public static int median(int[] arr, int k, int start, int end) {
+  public static int medianIndex(int[] arr, int k, int start, int end) {
     int index = partition(arr, pivotIndexMedian(arr, start, end), start, end);
     if (k-1 == index) {
-      return arr[index];
+      return index;
     } else if (k-1 < index) {
-      return median(arr, k, start, index-1);
+      return medianIndex(arr, k, start, index-1);
     } else {
-      return median(arr, k, index+1, end);
+      return medianIndex(arr, k, index+1, end);
     }
   }
 
@@ -130,7 +130,7 @@ public class QuickAlgorithms {
     }
 
     // (end - start + 1) / 5 / 2 == (end - start + 1) / 10
-    return median(arr, start + (end - start + 1) / 10 + 1, start, start + (end - start + 1) / 5);
+    return medianIndex(arr, start + (end - start + 1) / 10 + 1, start, start + (end - start + 1) / 5);
   }
 
   private static int findMedian5Index(int[] arr, int start, int end) {
