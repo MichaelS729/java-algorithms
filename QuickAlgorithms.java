@@ -108,11 +108,11 @@ public class QuickAlgorithms {
 
   /**
    * Breaks array into groups of 5 and computes the median of each,
-   * then recursive computes true median.
+   * then recursively computes true median.
    */
   private static int pivotIndexMedian(int[] arr, int start, int end) {
     if (end - start < 5) {
-      return partition(arr, pivotIndex(start, end), start, end);
+      return findMedian5Index(arr, start, end);
     }
     int i = start;
     while (i <= end) {
@@ -129,8 +129,8 @@ public class QuickAlgorithms {
       i = groupEnd + 1;
     }
 
-    // (right - left) / 5 / 2 == (right - left) / 10
-    return median(arr, start + (end - start) / 10 + 1, start, start + (int)Math.ceil((end - start) / 5) - 1);
+    // (end - start + 1) / 5 / 2 == (end - start + 1) / 10
+    return median(arr, start + (end - start + 1) / 10 + 1, start, start + (end - start + 1) / 5);
   }
 
   private static int findMedian5Index(int[] arr, int start, int end) {
@@ -159,7 +159,11 @@ public class QuickAlgorithms {
     System.out.println("Median from Median of Medians should be 3: " + Integer.toString(median(nums3)));
 
     int[] nums4 = {1, 5, 3, 6, 2, 8};
-    System.out.println("Median value should be 4.0: " + Double.toString(medianSimple(nums3)));
+    System.out.println("Median value should be 4.0: " + Double.toString(medianSimple(nums4)));
     System.out.println("Median from Median of Medians should be 3 or 5: " + Integer.toString(median(nums4)));
+
+    int[] nums5 = {8};
+    System.out.println("Median value should be 8.0: " + Double.toString(medianSimple(nums5)));
+    System.out.println("Median from Median of Medians should be 8: " + Integer.toString(median(nums5)));
   }
 }
