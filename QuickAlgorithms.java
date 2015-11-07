@@ -129,8 +129,8 @@ public class QuickAlgorithms {
       i = groupEnd + 1;
     }
 
-    // (end - start + 1) / 5 / 2 == (end - start + 1) / 10
-    return medianIndex(arr, start + (end - start + 1) / 10 + 1, start, start + (end - start + 1) / 5);
+    // (end - start) / 5 / 2 == (end - start) / 10
+    return medianIndex(arr, start + (end - start) / 10 + 1, start, start + (end - start) / 5);
   }
 
   private static int findMedian5Index(int[] arr, int start, int end) {
