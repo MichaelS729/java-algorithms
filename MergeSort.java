@@ -50,5 +50,11 @@ class MergeSort {
     int[] nums2 = {5, 4, 2, 3, 1, 6, 8, 7, 10};
     mergesort(nums2);
     System.out.println(Arrays.toString(nums2));
+    int[] nums3 = {10};
+    mergesort(nums3);
+    System.out.println(Arrays.toString(nums3));
+    int[] empty = new int[0];
+    mergesort(empty);
+    System.out.println(Arrays.toString(empty));
   }
 }
